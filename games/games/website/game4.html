@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sand Shape Puzzle</title>
+  <style>
+    body {
+      margin: 0;
+      background: #fff3e0;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .puzzle-container {
+      position: relative;
+      width: 600px;
+      height: 400px;
+      background: #ffecb3;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+      border-radius: 12px;
+    }
+
+    .shape {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+
+    .triangle {
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      background-color: #d7ccc8;
+      width: 80px;
+      height: 80px;
+    }
+
+    .circle {
+      border-radius: 50%;
+      background-color: #d7ccc8;
+      width: 80px;
+      height: 80px;
+    }
+
+    .star {
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+      background-color: #d7ccc8;
+      width: 80px;
+      height: 80px;
+    }
+
+    .square {
+      background-color: #d7ccc8;
+      width: 80px;
+      height: 80px;
+    }
+
+    .draggable {
+      cursor: grab;
+      background-color: #a1887f;
+      border: 2px solid #5d4037;
+    }
+  </style>
+</head>
+<body>
+
+<div class="puzzle-container" id="puzzle">
+
+  <!-- Fixed shapes already placed -->
+  <div class="shape triangle" style="left: 250px; top: 220px;"></div>
+  <div class="shape circle" style="left: 350px; top: 120px;"></div>
+  <div class="shape star" style="left: 150px; top: 150px;"></div>
+  <div class="shape square" style="left: 100px; top: 300px;"></div>
+
+  <!-- Drop targets for the missing shapes -->
+  <div class="shape triangle" id="dropTriangle" style="left: 50px; top: 50px;"></div>
+  <div class="shape circle" id="dropCircle" style="left: 50px; top: 150px;"></div>
+  <div class="shape star" id="dropStar" style="left: 50px; top: 250px;"></div>
+  <div class="shape square" id="dropSquare" style="left: 50px; top: 350px;"></div>
+
+  <!-- Draggable shapes -->
+  <div class="shape triangle draggable" id="dragTriangle" style="left: 500px; top: 50px;"></div>
+  <div class="shape circle draggable" id="dragCircle" style="left: 500px; top: 150px;"></div>
+  <div class="shape star draggable" id="dragStar" style="left: 500px; top: 250px;"></div>
+  <div class="shape square draggable" id="dragSquare" style="left: 500px; top: 350px;"></div>
+
+</div>
+
+<script>
+  const shapes = document.querySelectorAll('.draggable');
+  const dropZones = document.querySelectorAll('.shape');
+
+  shapes.forEach(shape => {
+    shape.addEventListener('mousedown', (e) => {
+      let offsetX = e.offsetX;
+      let offsetY = e.offsetY;
+      let isDragging = true;
+
+      document.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+          shape.style.left = `${e.pageX - offsetX}px`;
+          shape.style.top = `${e.pageY - offsetY}px`;
+        }
+      });
+
+      document.addEventListener('mouseup', () => {
+        isDragging = false;
+
+        dropZones.forEach(dropZone => {
+          const shapeRect = shape.getBoundingClientRect();
+          const dropZoneRect = dropZone.getBoundingClientRect();
+
+          const dx = shapeRect.left - dropZoneRect.left;
+          const dy = shapeRect.top - dropZoneRect.top;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 30) {
+            // Snap into place
+            shape.style.left = dropZone.style.left;
+            shape.style.top = dropZone.style.top;
+            shape.style.cursor = "default";
+            shape.style.pointerEvents = "none";
+            shape.style.backgroundColor = "#d7ccc8";
+          }
+        });
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

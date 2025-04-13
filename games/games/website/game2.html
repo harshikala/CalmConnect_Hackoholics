@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Breathe With Me 🌿</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #e0f7fa;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      color: #00695c;
+      margin-bottom: 30px;
+    }
+
+    .circle {
+      width: 100px;
+      height: 100px;
+      background-color: #a7ffeb;
+      border-radius: 50%;
+      transition: transform 3s ease-in-out;
+    }
+
+    #text {
+      margin-top: 30px;
+      font-size: 24px;
+      color: #004d40;
+      transition: all 0.5s ease;
+    }
+  </style>
+</head>
+<body>
+  <h1>Breathe With Me 🌿</h1>
+  <div class="circle" id="circle"></div>
+  <p id="text">Breathe In...</p>
+
+  <script>
+    const circle = document.getElementById('circle');
+    const text = document.getElementById('text');
+
+    const totalCycle = 7500; // 7.5 seconds
+    const breatheInTime = 3000;
+    const holdTime = 1500;
+    const breatheOutTime = 3000;
+
+    function breathingCycle() {
+      // Step 1: Breathe In
+      text.innerText = 'Breathe In...';
+      circle.style.transform = 'scale(1.5)';
+
+      setTimeout(() => {
+        // Step 2: Hold
+        text.innerText = 'Hold...';
+
+        setTimeout(() => {
+          // Step 3: Breathe Out
+          text.innerText = 'Breathe Out...';
+          circle.style.transform = 'scale(1)';
+
+        }, holdTime);
+
+      }, breatheInTime);
+    }
+
+    // Start immediately
+    breathingCycle();
+    // Repeat every full cycle
+    setInterval(breathingCycle, totalCycle);
+  </script>
+</body>
+</html>

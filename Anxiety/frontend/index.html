@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CalmConnect - Anxiety Assessment</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CalmConnect</h1>
+            <p>Assess... Heal... Connect</p>
+        </header>
+
+        <!-- User Selection Screen -->
+        <section id="user-selection" class="welcome-section active" aria-label="User type selection">
+            <h2>Welcome to CalmConnect! 🌟</h2>
+            <p>Are you here as an individual or a psychologist?</p>
+            <div class="user-type-buttons">
+                <button class="user-type-btn" data-type="individual" aria-label="Select Individual Role">I’m an Individual</button>
+                <button class="user-type-btn" data-type="psychologist" aria-label="Select Psychologist Role">I’m a Psychologist</button>
+            </div>
+        </section>
+
+        <div class="loading-overlay" aria-hidden="true">
+            <div class="loading-spinner">🌸</div>
+            <p>Loading...</p>
+        </div>
+
+        <!-- Individual Welcome Screen -->
+         
+        <section id="individual-welcome" class="welcome-section" aria-label="Individual welcome screen">
+            <div class="mascot">
+                <div class="mascot-cloud">☁️</div>
+                <p class="mascot-message">Hi there! I’m here to help you feel calm. Let’s get started! 🌟</p>
+            </div>
+            <h2>Let’s Check In With Yourself 🌼</h2>
+            <p>We’re here to help you understand your feelings. How are you feeling right now?</p>
+            <div class="mood-checkin" role="radiogroup" aria-label="Mood selection">
+                <div class="mood-option" data-mood="happy" role="radio" aria-checked="false" tabindex="0">😊 Happy</div>
+                <div class="mood-option" data-mood="sad" role="radio" aria-checked="false" tabindex="0">😢 Sad</div>
+                <div class="mood-option" data-mood="anxious" role="radio" aria-checked="false" tabindex="0">😟 Anxious</div>
+                <div class="mood-option" data-mood="calm" role="radio" aria-checked="false" tabindex="0">😌 Calm</div>
+            </div>
+            <p>Ready to start your anxiety assessment? It’ll take just a few minutes!</p>
+            <button class="start-assessment-btn" aria-label="Start anxiety assessment">Start Assessment</button>
+            <p>Or explore some relaxation tools first:</p>
+            <div class="relaxation-links">
+                <a href="#music" aria-label="Listen to soothing music">🎶 Soothing Music</a>
+                <a href="#yoga" aria-label="Watch yoga videos">🧘 Yoga Videos</a>
+                <a href="#chatbot" aria-label="Talk to AI chatbot">💬 Talk to Our AI Chatbot</a>
+            </div>
+        </section>
+
+        <!-- Psychologist Dashboard -->
+        <section id="psychologist-dashboard" class="welcome-section" aria-label="Psychologist dashboard">
+            <h2>Welcome Back, Dr. [Name]! 🌟</h2>
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <h3>Clients</h3>
+                    <p>5</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Appointments Today</h3>
+                    <p>3</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Reward Points</h3>
+                    <p>150</p>
+                </div>
+            </div>
+            <div class="client-selection">
+                <label for="client-select">Select a Client:</label>
+                <select id="client-select" aria-label="Select a client">
+                    <option value="">Select a Client</option>
+                    <option value="client1">Client 1</option>
+                    <option value="client2">Client 2</option>
+                    <option value="client3">Client 3</option>
+                </select>
+            </div>
+            <button class="view-client-btn" aria-label="View selected client's assessment">View Client Assessment</button>
+            <div class="quick-links">
+                <a href="#schedule" aria-label="Schedule an appointment">📅 Schedule Appointment</a>
+                <a href="#insights" aria-label="View AI insights">📊 AI Insights</a>
+            </div>
+        </section>
+
+        <!-- Form Sections -->
+        <main>
+            <form id="assessment-form" aria-label="Anxiety assessment form">
+                <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                    <div class="progress"></div>
+                    <div class="progress-labels">
+                        <span>Demographics</span>
+                        <span>Emotional Well-Being</span>
+                        <span>Sleep Patterns</span>
+                        <span>Mindfulness</span>
+                    </div>
+                </div>
+
+                <!-- Section 1: Demographics -->
+                <section class="form-section" data-section="1" aria-label="Demographics section">
+                    <h2>Let’s Get to Know You</h2>
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" name="age" min="1" max="120" required aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender" required aria-required="true">
+                            <option value="">Select</option>
+                            <option value="female">Female</option>
+                            <option value="male">Male</option>
+                            <option value="other">Other</option>
+                            <option value="prefer-not-to-say">Prefer not to say</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="occupation">Occupation</label>
+                        <input type="text" id="occupation" name="occupation" required aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="relationship-status">Relationship Status</label>
+                        <select id="relationship-status" name="relationship-status" required aria-required="true">
+                            <option value="">Select</option>
+                            <option value="single">Single</option>
+                            <option value="married">Married</option>
+                            <option value="in-relationship">In a Relationship</option>
+                            <option value="divorced">Divorced</option>
+                            <option value="widowed">Widowed</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="family">Family</label>
+                        <select id="family" name="family" required aria-required="true">
+                            <option value="">Select</option>
+                            <option value="yes">Yes, I live with family</option>
+                            <option value="no">No, I don’t live with family</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="living-status">Living Status</label>
+                        <select id="living-status" name="living-status" required aria-required="true">
+                            <option value="">Select</option>
+                            <option value="alone">Alone</option>
+                            <option value="with-roommates">With Roommates</option>
+                            <option value="with-family">With Family</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="family-members">No. of Family Members</label>
+                        <input type="number" id="family-members" name="family-members" min="0" required aria-required="true">
+                    </div>
+                    <button type="button" class="next-btn" aria-label="Go to next section">Next</button>
+                </section>
+
+                <!-- Section 2: Emotional Well-Being -->
+                <section class="form-section" data-section="2" aria-label="Emotional well-being section">
+                    <h2>Your Emotional Well-Being</h2>
+                    <div class="parameter">
+                        <p class="statement">In the last month, how often have you felt difficulties were piling up so high that you could not overcome them?</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of feeling overwhelmed">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">In the last month, how often have you been angered because of things that happened that were outside of your control?</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of feeling angered">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">In the last month, how often have you felt that you were on top of things?</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of feeling in control">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">In the last month, how often have you been able to control irritations in your life?</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of controlling irritations">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <!-- <div class="parameter">
+                        <p class="statement">In the last month, how often have you been upset because of something that happened unexpectedly?</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of feeling upset">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">In the last month, how often have you felt that you were unable to control the important things in your life?</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of feeling unable to control">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">In the last month, how often have you felt nervous and stressed?</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of feeling nervous">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">In the last month, how often have you felt confident about your ability to handle your personal problems?</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of feeling confident">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">In the last month, how often have you felt that things were going your way?</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of feeling things going well">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">In the last month, how often have you found that you could not cope with all the things that you had to do?</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of feeling unable to cope">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div> -->
+                    <button type="button" class="prev-btn" aria-label="Go to previous section">Previous</button>
+                    <button type="button" class="next-btn" aria-label="Go to next section">Next</button>
+                </section>
+
+                <!-- Section 3: Sleep Patterns -->
+                <section class="form-section" data-section="3" aria-label="Sleep patterns section">
+                    <h2>Your Sleep Patterns</h2>
+                    <div class="parameter">
+                        <p class="statement">During the past month, how would you rate your sleep quality overall?</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Sleep quality rating">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Very Bad</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Bad</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Okay</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Good</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Very Good</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">During the past month, how often have you taken medicine to help you sleep (prescribed or "over the counter")?</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of taking sleep medicine">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">During the past month, how often have you had trouble staying awake while driving, eating meals, or engaging in social activity?</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of trouble staying awake">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">During the past month, how much of a problem has it been for you to keep up enough enthusiasm to get things done?</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Difficulty maintaining enthusiasm">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Not a Problem</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Slight Problem</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Moderate Problem</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Severe Problem</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Very Severe Problem</span></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bed-time">During the past month, what time have you usually gone to bed at night?</label>
+                        <input type="time" id="bed-time" name="bed-time" required aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="fall-asleep-minutes">During the past month, how long (in minutes) has it usually taken you to fall asleep each night?</label>
+                        <input type="number" id="fall-asleep-minutes" name="fall-asleep-minutes" min="0" required aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="getting-up-time">During the past month, what time have you usually gotten up in the morning?</label>
+                        <input type="time" id="getting-up-time" name="getting-up-time" required aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="hours-of-sleep">During the past month, how many hours of actual sleep did you get at night?</label>
+                        <input type="number" id="hours-of-sleep" name="hours-of-sleep" min="0" max="24" required aria-required="true">
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">During the past month, how often have you had trouble sleeping because you cannot get to sleep within 30 minutes?</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of trouble sleeping within 30 minutes">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">During the past month, how often have you had trouble sleeping because you wake up in the middle of the night or early morning?</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of waking up at night">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">During the past month, how often have you had trouble sleeping because you have to get up to use the bathroom?</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of waking to use bathroom">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">During the past month, how often have you had trouble sleeping because you cannot breathe comfortably?</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of breathing discomfort">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">During the past month, how often have you had trouble sleeping because you cough or snore loudly?</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of coughing or snoring">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">During the past month, how often have you had trouble sleeping because you feel too cold?</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of feeling too cold">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">During the past month, how often have you had trouble sleeping because you feel too hot?</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of feeling too hot">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <!-- <div class="parameter">
+                        <p class="statement">During the past month, how often have you had trouble sleeping because you had bad dreams?</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of bad dreams">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">During the past month, how often have you had trouble sleeping because you have pain?</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of pain affecting sleep">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div> -->
+                    <div class="form-group">
+                        <label for="bed-partner">Do you have a bed partner or roommate?</label>
+                        <select id="bed-partner" name="bed-partner" required aria-required="true">
+                            <option value="">Select</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                    <button type="button" class="prev-btn" aria-label="Go to previous section">Previous</button>
+                    <button type="button" class="next-btn" aria-label="Go to next section">Next</button>
+                </section>
+
+                <!-- Section 4: Mindfulness -->
+                <section class="form-section" data-section="4" aria-label="Mindfulness section">
+                    <h2>Your Mindfulness</h2>
+                    <div class="parameter">
+                        <p class="statement">I drive places on ‘automatic pilot’ and then wonder why I went there.</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of automatic pilot driving">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">I find myself preoccupied with the future or the past.</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of preoccupation with future or past">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">I find myself doing things without paying attention.</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of doing things without attention">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">I snack without being aware that I’m eating.</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of unaware snacking">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">I could be experiencing some emotion and not be conscious of it until some time later.</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of delayed emotion awareness">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">I break or spill things because of carelessness, not paying attention, or thinking of something else.</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of carelessness">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">I find it difficult to stay focused on what’s happening in the present.</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Difficulty staying focused">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">I tend to walk quickly to get where I’m going without paying attention to what I experience along the way.</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of walking without attention">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">I tend not to notice feelings of physical tension or discomfort until they really grab my attention.</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of not noticing tension">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">I forget a person’s name almost as soon as I’ve been told it for the first time.</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of forgetting names">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">It seems I am “running on automatic,” without much awareness of what I’m doing.</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of running on automatic">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">I rush through activities without being really attentive to them.</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of rushing without attention">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">I get so focused on the goal I want to achieve that I lose touch with what I’m doing right now to get there.</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of losing touch with present">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">I do jobs or tasks automatically, without being aware of what I'm doing.</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of automatic tasks">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <p class="statement">I find myself listening to someone with one ear, doing something else at the same time.</p>
+                        <div class="likert-scale" role="radiogroup" aria-label="Frequency of distracted listening">
+                            <div class="option" data-value="1" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Never</span></div>
+                            <div class="option" data-value="2" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Rarely</span></div>
+                            <div class="option" data-value="3" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Sometimes</span></div>
+                            <div class="option" data-value="4" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Often</span></div>
+                            <div class="option" data-value="5" role="radio" aria-checked="false" tabindex="0"><div class="bubble"></div><span>Always</span></div>
+                        </div>
+                    </div>
+                    <button type="button" class="prev-btn" aria-label="Go to previous section">Previous</button>
+                    <button type="submit" class="submit-btn" aria-label="Submit assessment">Submit</button>
+                </section>
+            </form>
+        </main>
+
+        <!-- Individual Results -->
+        <section id="individual-results" class="results-section" aria-label="Individual assessment results">
+            <div class="mascot">
+                <div class="mascot-cloud">☁️</div>
+                <p class="mascot-message">Great job completing the assessment! Let’s work on feeling better together! 🌼</p>
+            </div>
+            <h2>Your Anxiety Assessment Report 🌟</h2>
+            <div class="anxiety-summary">
+                <h3>Anxiety Level</h3>
+                <div class="anxiety-meter">
+                    <div class="meter-fill" style="width: 60%;"></div>
+                </div>
+                <p>Moderate</p>
+            </div>
+            <div class="report-breakdown">
+                <h3>Breakdown</h3>
+                <div class="breakdown-item">
+                    <p>Emotional Well-Being: 70%</p>
+                    <div class="progress-circle" style="background: conic-gradient(#ffb3c6 0% 70%, #e0e0e0 70% 100%);"></div>
+                </div>
+                <div class="breakdown-item">
+                    <p>Sleep Patterns: 40%</p>
+                    <div class="progress-circle" style="background: conic-gradient(#ffb3c6 0% 40%, #e0e0e0 40% 100%);"></div>
+                </div>
+                <div class="breakdown-item">
+                    <p>Mindfulness: 55%</p>
+                    <div class="progress-circle" style="background: conic-gradient(#ffb3c6 0% 55%, #e0e0e0 55% 100%);"></div>
+                </div>
+            </div>
+            <div class="recommendations">
+                <h3>Personalized Recommendations</h3>
+                <p>Based on your responses, we recommend trying some yoga videos to improve your sleep quality. 🧘</p>
+                <p>Your anxiety level is moderate. Would you like to connect with a psychologist?</p>
+                <button class="connect-psychologist-btn" aria-label="Connect with a psychologist">Connect with a Psychologist</button>
+            </div>
+            <div class="next-steps">
+                <h3>Next Steps</h3>
+                <p>Feeling overwhelmed? Talk to our AI chatbot for support! 💬</p>
+                <button class="chatbot-btn" aria-label="Chat with AI chatbot">Chat Now</button>
+                <p>Start tracking your anxiety with our Anxiety Tracker Calendar:</p>
+                <div class="calendar-preview">📅</div>
+                <p>Share your report with loved ones:</p>
+                <button class="share-btn" aria-label="Share assessment report">Share Report</button>
+                <p>Start tracking your anxiety with our Anxiety Tracker Calendar:</p>
+                <div class="anxiety-tracker-preview">
+                    <label for="anxiety-level">Today’s Anxiety Level (1-5):</label>
+                    <select id="anxiety-level" aria-label="Select today’s anxiety level">
+                        <option value="1">1 - Very Low</option>
+                        <option value="2">2 - Low</option>
+                        <option value="3">3 - Moderate</option>
+                        <option value="4">4 - High</option>
+                        <option value="5">5 - Very High</option>
+                    </select>
+                    <button class="log-anxiety-btn" aria-label="Log today’s anxiety level">Log Today</button>
+                    <p class="log-message"></p>
+                </div>
+                <p>Try a quick breathing exercise to relax:</p>
+                <div class="breathing-exercise">
+                    <div class="breathing-circle"></div>
+                    <p class="breathing-instruction">Click to start</p>
+                    <button class="breathing-btn" aria-label="Start breathing exercise">Breathe With Me 🌬️</button>
+                </div>
+                <div class="spotify-recommendation">
+                    <h3>Relax with Music 🎶</h3>
+                    <p id="playlist-message">Fetching your playlist...</p>
+                    <a id="playlist-link" href="#" target="_blank" aria-label="Open Spotify playlist"></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Psychologist Results -->
+        <section id="psychologist-results" class="results-section" aria-label="Psychologist client assessment results">
+            <h2>Client Assessment Report 🌟</h2>
+            <div class="client-summary">
+                <h3>Client: [Client Name]</h3>
+                <p>Anxiety Level: Moderate</p>
+            </div>
+            <div class="report-breakdown">
+                <h3>Detailed Breakdown</h3>
+                <div class="breakdown-item">
+                    <p>Emotional Well-Being: 70%</p>
+                    <div class="progress-circle" style="background: conic-gradient(#ffb3c6 0% 70%, #e0e0e0 70% 100%);"></div>
+                </div>
+                <div class="breakdown-item">
+                    <p>Sleep Patterns: 40%</p>
+                    <div class="progress-circle" style="background: conic-gradient(#ffb3c6 0% 40%, #e0e0e0 40% 100%);"></div>
+                </div>
+                <div class="breakdown-item">
+                    <p>Mindfulness: 55%</p>
+                    <div class="progress-circle" style="background: conic-gradient(#ffb3c6 0% 55%, #e0e0e0 55% 100%);"></div>
+                </div>
+            </div>
+            <div class="ai-insights">
+                <h3>AI-Driven Insights</h3>
+                <p>Client shows high anxiety related to sleep disturbances. Consider discussing sleep hygiene techniques.</p>
+            </div>
+            <div class="progress-trends">
+                <h3>Progress Trends</h3>
+                <p>Compared to last assessment, sleep quality has decreased by 10%.</p>
+            </div>
+            <div class="recommendations">
+                <h3>Recommended Interventions</h3>
+                <p>Suggest mindfulness exercises to improve focus and reduce mindfulness deficits.</p>
+            </div>
+            <div class="next-steps">
+                <h3>Next Steps</h3>
+                <p>Schedule a follow-up appointment with this client:</p>
+                <button class="schedule-btn" aria-label="Schedule follow-up appointment">Schedule Appointment</button>
+                <p>Reward Points Updated: +50 points</p>
+            </div>
+        </section>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

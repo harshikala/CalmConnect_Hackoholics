@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Zen Puzzle Game</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #e0f7fa;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #00695c;
+    }
+
+    .game-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(10, 30px);
+      grid-template-rows: repeat(10, 30px);
+      gap: 2px;
+      margin: 20px 0;
+    }
+
+    .grid div {
+      width: 30px;
+      height: 30px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+    }
+
+    .piece {
+      display: grid;
+      grid-template-columns: repeat(2, 30px);
+      grid-template-rows: repeat(2, 30px);
+      gap: 2px;
+      margin-top: 20px;
+      cursor: grab;
+    }
+
+    .piece div {
+      width: 30px;
+      height: 30px;
+      background-color: #a7ffeb;
+      border: 2px solid #26a69a;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧘 Zen Puzzle Blocks</h1>
+  <div class="game-container">
+    <div id="grid" class="grid"></div>
+
+    <div class="piece" draggable="true" id="squarePiece">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+
+  <script>
+    const grid = document.getElementById('grid');
+
+    // Create 10x10 grid
+    const gridSize = 10;
+    const cells = [];
+
+    for (let i = 0; i < 100; i++) {
+      const cell = document.createElement('div');
+      cell.dataset.index = i;
+      grid.appendChild(cell);
+      cells.push(cell);
+    }
+
+    let dragged = null;
+
+    const piece = document.getElementById('squarePiece');
+
+    piece.addEventListener('dragstart', (e) => {
+      dragged = true;
+    });
+
+    grid.addEventListener('dragover', (e) => {
+      e.preventDefault();
+    });
+
+    grid.addEventListener('drop', (e) => {
+      if (!dragged) return;
+
+      const target = e.target;
+      if (!target.dataset.index) return;
+
+      const index = parseInt(target.dataset.index);
+      const row = Math.floor(index / gridSize);
+      const col = index % gridSize;
+
+      // Prevent overflow
+      if (row >= gridSize - 1 || col >= gridSize - 1) return;
+
+      // Fill 2x2 block
+      const topLeft = index;
+      const topRight = index + 1;
+      const bottomLeft = index + gridSize;
+      const bottomRight = index + gridSize + 1;
+
+      [topLeft, topRight, bottomLeft, bottomRight].forEach(i => {
+        cells[i].style.backgroundColor = '#a7ffeb';
+      });
+
+      dragged = null;
+    });
+  </script>
+</body>
+</html>
